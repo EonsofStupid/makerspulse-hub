@@ -24,7 +24,7 @@ export const UserMenu = ({ onClose }: { onClose: () => void }) => {
 
   return (
     <motion.div 
-      className="fixed md:absolute right-0 mt-2 w-72 rounded-xl bg-[#221a2b] backdrop-blur-xl border border-[#95bf0b]/20 shadow-xl z-[100] 
+      className="fixed md:absolute right-0 mt-2 w-72 rounded-xl bg-[#221a2b] backdrop-blur-xl border border-[#95bf0b]/20 shadow-xl z-[500] 
                  overflow-hidden"
       initial={{ opacity: 0, scale: 0.95, y: -20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
