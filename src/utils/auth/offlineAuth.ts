@@ -1,4 +1,4 @@
-import { AuthSession } from '@/components/auth/types';
+import { AuthSession } from '@/integrations/supabase/types/auth';
 
 const SESSION_STORAGE_KEY = 'auth_session_backup';
 

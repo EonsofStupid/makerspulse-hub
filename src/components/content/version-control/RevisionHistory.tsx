@@ -54,17 +54,32 @@ export const RevisionHistory: React.FC<RevisionHistoryProps> = ({
         throw error;
       }
 
-      return data.map((item) => ({
-        id: item.id,
-        content: item.content,
-        created_at: item.created_at,
-        created_by: item.created_by
-          ? {
-              display_name: item.created_by.display_name,
-              avatar_url: item.created_by.avatar_url,
-            }
-          : null,
-      })) as Revision[];
+      return data.map((item) => {
+        let createdBy: Profile | null = null;
+        
+        if (item.created_by) {
+          if (Array.isArray(item.created_by) && item.created_by.length > 0) {
+            const profile: any = item.created_by[0];
+            createdBy = {
+              display_name: profile.display_name,
+              avatar_url: profile.avatar_url,
+            };
+          } else if (typeof item.created_by === 'object' && !Array.isArray(item.created_by)) {
+            const profile: any = item.created_by;
+            createdBy = {
+              display_name: profile.display_name,
+              avatar_url: profile.avatar_url,
+            };
+          }
+        }
+        
+        return {
+          id: item.id,
+          content: item.content,
+          created_at: item.created_at,
+          created_by: createdBy,
+        };
+      }) as Revision[];
     },
   });
 

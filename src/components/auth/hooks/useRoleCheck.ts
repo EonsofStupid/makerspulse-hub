@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '@/lib/store/auth-store';
-import { AuthState, UserRole } from '../types';
+import { AuthState, UserRole } from '@/integrations/supabase/types/auth';
 
 const roleHierarchy: { [key: string]: number } = {
   'subscriber': 0,
   'maker': 1,
-  'admin': 2,
-  'super_admin': 3
+  'moderator': 2,
+  'admin': 3,
+  'super_admin': 4
 };
 
 export const useRoleCheck = (

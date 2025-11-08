@@ -2,12 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
+import { UserRole } from '@/integrations/supabase/types/auth';
+
 export interface Profile {
   id: string;
   username: string | null;
   display_name: string | null;
   avatar_url: string | null;
-  role: 'subscriber' | 'maker' | 'admin' | 'super_admin' | null;
+  role: UserRole | null;
   bio: string | null;
   website: string | null;
   location: string | null;

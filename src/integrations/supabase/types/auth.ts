@@ -1,6 +1,6 @@
 import type { Session } from '@supabase/supabase-js';
 
-export type UserRole = 'subscriber' | 'maker' | 'admin' | 'super_admin';
+export type UserRole = 'subscriber' | 'maker' | 'moderator' | 'admin' | 'super_admin';
 
 export interface AuthUser {
   id: string;
@@ -8,6 +8,10 @@ export interface AuthUser {
   role?: UserRole;
   username?: string;
   displayName?: string;
+  user_metadata?: {
+    avatar_url?: string;
+    [key: string]: any;
+  };
 }
 
 export interface AuthSession {

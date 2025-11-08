@@ -25,6 +25,7 @@ export const useThemeSettings = () => {
         const { data: newSettings, error: insertError } = await supabase
           .from("site_settings")
           .insert([{
+            setting_key: 'default',
             site_title: 'MakersImpulse',
             primary_color: '#7FFFD4',
             secondary_color: '#FFB6C1',

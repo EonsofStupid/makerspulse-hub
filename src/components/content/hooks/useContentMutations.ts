@@ -16,11 +16,17 @@ export const useContentMutations = () => {
         throw new Error("Content validation failed");
       }
 
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        throw new Error("User not authenticated");
+      }
+
       const { data: result, error } = await supabase
         .from("cms_content")
         .insert({
           type,
           title,
+          created_by: user.id,
           ...validation.data
         })
         .select()

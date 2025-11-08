@@ -17,9 +17,42 @@ export const TransitionSettingsSection = () => {
     setSettings(prev => ({ ...prev, [key]: value }));
     
     try {
+      // Fetch current settings first
+      const { data: currentSettings } = await supabase
+        .from('site_settings')
+        .select('*')
+        .single();
+      
+      if (!currentSettings) {
+        toast.error("Failed to load current settings");
+        return;
+      }
+
       const { data, error } = await supabase.rpc('update_site_settings', {
-        p_transition_duration: `${value}s`,
-        p_hover_scale: value.toString()
+        p_site_title: currentSettings.site_title,
+        p_tagline: currentSettings.tagline || '',
+        p_primary_color: currentSettings.primary_color,
+        p_secondary_color: currentSettings.secondary_color,
+        p_accent_color: currentSettings.accent_color,
+        p_text_primary_color: currentSettings.text_primary_color,
+        p_text_secondary_color: currentSettings.text_secondary_color,
+        p_text_link_color: currentSettings.text_link_color,
+        p_text_heading_color: currentSettings.text_heading_color,
+        p_neon_cyan: currentSettings.neon_cyan,
+        p_neon_pink: currentSettings.neon_pink,
+        p_neon_purple: currentSettings.neon_purple,
+        p_border_radius: currentSettings.border_radius,
+        p_spacing_unit: currentSettings.spacing_unit,
+        p_transition_duration: key === 'pageTransition' ? `${value}s` : currentSettings.transition_duration,
+        p_shadow_color: currentSettings.shadow_color,
+        p_hover_scale: key === 'hoverScale' ? value.toString() : currentSettings.hover_scale,
+        p_font_family_heading: currentSettings.font_family_heading,
+        p_font_family_body: currentSettings.font_family_body,
+        p_font_size_base: currentSettings.font_size_base,
+        p_font_weight_normal: currentSettings.font_weight_normal,
+        p_font_weight_bold: currentSettings.font_weight_bold,
+        p_line_height_base: currentSettings.line_height_base,
+        p_letter_spacing: currentSettings.letter_spacing
       });
 
       if (error) throw error;

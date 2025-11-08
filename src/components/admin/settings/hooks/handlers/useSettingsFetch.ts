@@ -29,7 +29,7 @@ export const useSettingsFetch = () => {
         accent_color: data.accent_color,
         logo_url: data.logo_url,
         favicon_url: data.favicon_url,
-        theme_mode: data.theme_mode,
+        theme_mode: (data.theme_mode as 'light' | 'dark' | 'system') || 'system',
         text_primary_color: data.text_primary_color,
         text_secondary_color: data.text_secondary_color,
         text_link_color: data.text_link_color,

@@ -16,7 +16,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const { error } = await supabase.rpc('update_site_settings', {
         p_site_title: newTheme.site_title,
-        p_tagline: newTheme.tagline,
+        p_tagline: newTheme.tagline || '',
         p_primary_color: newTheme.primary_color,
         p_secondary_color: newTheme.secondary_color,
         p_accent_color: newTheme.accent_color,
@@ -27,6 +27,11 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         p_neon_cyan: newTheme.neon_cyan,
         p_neon_pink: newTheme.neon_pink,
         p_neon_purple: newTheme.neon_purple,
+        p_border_radius: newTheme.border_radius || '0.5rem',
+        p_spacing_unit: newTheme.spacing_unit || '1rem',
+        p_transition_duration: newTheme.transition_duration || '0.3s',
+        p_shadow_color: newTheme.shadow_color || '#000000',
+        p_hover_scale: newTheme.hover_scale || '1.05',
         p_font_family_heading: newTheme.font_family_heading,
         p_font_family_body: newTheme.font_family_body,
         p_font_size_base: newTheme.font_size_base,

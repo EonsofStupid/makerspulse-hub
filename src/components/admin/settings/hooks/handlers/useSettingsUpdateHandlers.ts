@@ -44,8 +44,6 @@ export const useSettingsUpdateHandlers = () => {
         p_primary_color: formData.primary_color,
         p_secondary_color: formData.secondary_color,
         p_accent_color: formData.accent_color,
-        p_logo_url: logo_url,
-        p_favicon_url: favicon_url,
         p_text_primary_color: formData.text_primary_color,
         p_text_secondary_color: formData.text_secondary_color,
         p_text_link_color: formData.text_link_color,
@@ -66,6 +64,19 @@ export const useSettingsUpdateHandlers = () => {
         p_line_height_base: formData.line_height_base,
         p_letter_spacing: formData.letter_spacing,
       });
+      
+      // Update logo and favicon separately if they exist
+      if (logo_url || favicon_url) {
+        const { error: updateError } = await supabase
+          .from('site_settings')
+          .update({
+            ...(logo_url && { logo_url }),
+            ...(favicon_url && { favicon_url })
+          })
+          .eq('setting_key', 'default');
+        
+        if (updateError) throw updateError;
+      }
 
       if (error) throw error;
 

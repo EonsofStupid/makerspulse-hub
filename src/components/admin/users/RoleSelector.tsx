@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { UserRole } from '@/components/auth/types';
+import { UserRole } from '@/integrations/supabase/types/auth';
 
 interface RoleSelectorProps {
   currentRole: UserRole;
